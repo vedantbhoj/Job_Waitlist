@@ -25,6 +25,12 @@ function populateJobs() {
     }
 
 
+    function minutes(date_added) { 
+        var dif = (Date.now() - date_added); 
+        var dif = Math.round((dif/1000)/60); 
+        return dif; 
+    } 
+
     if (typeof (Storage) !== "undefined") {
 
         var job_list = JSON.parse(localStorage.getItem('job_list'));
@@ -33,9 +39,9 @@ function populateJobs() {
         function iterate(item, index) {
             var cardHtml = '<div class="card pr-card" style="background-color:' + getRandomColor(h_range, s_range, l_range, a_range) + '">' +
                 '    <div class="card-body pr-card-body">' +
-                '        <h5 class="card-title">' + item.name + ' <span class="delete-job" id="'+index+'" ><i class="fa fa-trash"></i></span> </h5> ' +
+                '        <h5 class="card-title">' + item.name + ' <span class="delete-job" id="' + index + '" ><i class="fa fa-trash"></i></span> </h5> ' +
                 '        <p class="card-text">' + item.title + '</p>' +
-                '        <p class="card-text pr-card-updates"><small>Last updated 3 mins ago</small></p>' +
+                '        <p class="card-text pr-card-updates"><small>added '+ minutes(item.date_added)+' minutes ago</small></p>' +
                 '    </div> ' +
                 '    </div>';
 
@@ -48,7 +54,7 @@ function populateJobs() {
 
         if (job_list.length > 0) {
             $(".delete-job").click(function () {
-                $('#delete_btn').attr('data-jobid',$(this).data('id'));
+                $('#delete_btn').attr('data-jobid', $(this).data('id'));
                 $('#deletejob_dialog').modal('show');
             });
         }
@@ -91,31 +97,6 @@ function deleteJob() {
 
 
 if (typeof (Storage) !== "undefined") {
-    var initial_list = [];
-    // var initial_list = [
-    //     {
-    //         "name": "Pathrise",
-    //         "title": "Web Developer",
-    //         "date_added": ""
-    //     },
-    //     {
-    //         "name": "Airbnb",
-    //         "title": "Web Developer",
-    //         "date_added": ""
-    //     },
-    //     {
-    //         "name": "Google",
-    //         "title": "Software Engineer",
-    //         "date_added": ""
-    //     },
-    //     {
-    //         "name": "Facebook",
-    //         "title": "Software Engineer",
-    //         "date_added": ""
-    //     }
-    // ];
-
-    localStorage.setItem('job_list', JSON.stringify(initial_list));
     populateJobs();
 }
 else {

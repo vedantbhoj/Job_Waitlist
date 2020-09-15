@@ -6,14 +6,27 @@
 .pr-card {
     color: white;
     margin:  0 0 7px 0;
+    cursor: pointer;
 }
 
 span.delete-job{
     display: none;
+    cursor: pointer;
 }
+
+span.delete-job:hover {
+    color: black;
+}
+
+
 .pr-card:hover span.delete-job{
 display: inline-block;
 }
+
+#addjob_plus:hover{
+    border: 2px solid rgba(0,0,0,.125);
+}
+
 
 .pr-card-updates {
     text-align: right;
