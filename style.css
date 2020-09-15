@@ -1,0 +1,55 @@
+.card-text { 
+    color: #ffffffbf;
+    font-weight: 400;
+}
+
+.pr-card {
+    color: white;
+    margin:  0 0 7px 0;
+}
+
+span.delete-job{
+    display: none;
+}
+.pr-card:hover span.delete-job{
+display: inline-block;
+}
+
+.pr-card-updates {
+    text-align: right;
+}
+
+.jobs-container {
+    width: 40%;
+    margin:25px 0 0 35px;
+ }
+
+ .jobs-header {
+     text-align: center;
+     margin-bottom: 7px;
+ }
+
+ .job-count {
+     color: gray;
+ }
+
+ .delete-job {
+     float: right;
+     cursor: pointer;
+ }
+
+
+ /*Modal*/
+ .addJob-header {
+    border-bottom: none;
+ }
+
+ .addJob-footer {
+    border-top: none;
+    margin: 0 0 20px 0;
+}
+
+
+.pr-text {
+}
+ /*Modal*/
