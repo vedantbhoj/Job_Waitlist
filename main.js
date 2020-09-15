@@ -25,41 +25,39 @@ function populateJobs() {
     }
 
 
-    function minutes(date_added) { 
-        var dif = (Date.now() - date_added); 
-        var dif = Math.round((dif/1000)/60); 
-        return dif; 
-    } 
+    function minutes(date_added) {
+        var dif = (Date.now() - date_added);
+        var dif = Math.round((dif / 1000) / 60);
+        return dif;
+    }
 
     if (typeof (Storage) !== "undefined") {
 
         var job_list = JSON.parse(localStorage.getItem('job_list'));
-        $(".card-container").html('');
 
         function iterate(item, index) {
             var cardHtml = '<div class="card pr-card" style="background-color:' + getRandomColor(h_range, s_range, l_range, a_range) + '">' +
                 '    <div class="card-body pr-card-body">' +
                 '        <h5 class="card-title">' + item.name + ' <span class="delete-job" id="' + index + '" ><i class="fa fa-trash"></i></span> </h5> ' +
                 '        <p class="card-text">' + item.title + '</p>' +
-                '        <p class="card-text pr-card-updates"><small>added '+ minutes(item.date_added)+' minutes ago</small></p>' +
+                '        <p class="card-text pr-card-updates"><small>added ' + minutes(item.date_added) + ' minutes ago</small></p>' +
                 '    </div> ' +
                 '    </div>';
 
             //console.log(getRandomColor(h_range, s_range, l_range, a_range));
             $(".card-container").append(cardHtml);
         }
+        $(".card-container").html('');
+        if (job_list != null) {
+            job_list.forEach(iterate);
 
-
-        job_list.forEach(iterate);
-
-        if (job_list.length > 0) {
             $(".delete-job").click(function () {
                 $('#delete_btn').attr('data-jobid', $(this).data('id'));
                 $('#deletejob_dialog').modal('show');
             });
-        }
-        $('.job-count').html(job_list.length + ' JOBS')
 
+            $('.job-count').html(job_list.length + ' JOBS');
+        }
     }
 }
 
@@ -77,6 +75,10 @@ $('#addJobForm').submit(function (e) {
     if (typeof (Storage) !== "undefined") {
 
         var job_list = JSON.parse(localStorage.getItem('job_list'));
+
+        if (job_list == null)
+            job_list = [];
+
         job_list.push(job_obj);
         $('.pr-text').val('');
         localStorage.setItem('job_list', JSON.stringify(job_list));
